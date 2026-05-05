@@ -105,16 +105,20 @@ class Base64Converter {
     }
 
     linkifyText(text) {
-        // Create a temporary container
+        // Create a temporary container with proper whitespace preservation
         const tempDiv = document.createElement('div');
+        tempDiv.style.whiteSpace = 'pre-wrap';
+        tempDiv.style.wordWrap = 'break-word';
         
-        // URL regex pattern
-        const urlRegex = /(https?:\/\/[^\s]+|www\.[^\s]+|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
+        // URL regex pattern for splitting
+        const urlRegexForSplit = /(https?:\/\/[^\s]+|www\.[^\s]+|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
+        // URL regex pattern for testing
+        const urlRegexForTest = /^(https?:\/\/[^\s]+|www\.[^\s]+|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
         
-        const parts = text.split(urlRegex);
+        const parts = text.split(urlRegexForSplit);
         
         parts.forEach(part => {
-            if (urlRegex.test(part)) {
+            if (part && urlRegexForTest.test(part)) {
                 const link = document.createElement('a');
                 
                 // Handle email
@@ -267,15 +271,16 @@ class Base64Converter {
 
     swapFields() {
         const inputValue = this.inputField.value;
-        const outputValue = this.outputField.value;
+        // Get output value from either textarea or preview
+        const outputValue = this.outputField.value || this.outputPreview.textContent;
 
         this.inputField.value = outputValue;
         this.inputCount.textContent = outputValue.length;
 
-        this.outputField.value = inputValue;
-        this.outputCount.textContent = inputValue.length;
-
+        this.outputField.value = '';
         this.outputPreview.innerHTML = '';
+        this.outputCount.textContent = '0';
+
         this.outputField.classList.remove('hidden');
         this.outputPreview.classList.add('hidden');
 

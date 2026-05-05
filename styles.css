@@ -166,6 +166,10 @@ textarea:disabled {
     pointer-events: none;
     transition: opacity 0.3s ease;
     line-height: 1.6;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 0.95rem;
 }
 
 .output-preview:not(.hidden) {
