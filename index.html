@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 Converter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Base64 Converter</h1>
+            <p class="subtitle">Encode and decode in real-time</p>
+        </header>
+
+        <div class="converter-wrapper">
+            <div class="input-section">
+                <label for="input-field">Input</label>
+                <textarea 
+                    id="input-field" 
+                    placeholder="Enter text to encode or base64 to decode..."
+                    autocomplete="off"
+                    spellcheck="false"
+                ></textarea>
+                <div class="char-count">
+                    <span id="input-count">0</span> characters
+                </div>
+            </div>
+
+            <div class="output-section">
+                <label for="output-field">Output</label>
+                <div id="output-container" class="output-container">
+                    <textarea 
+                        id="output-field" 
+                        placeholder="Converted result will appear here..."
+                        readonly
+                        autocomplete="off"
+                    ></textarea>
+                    <div id="output-preview" class="output-preview hidden"></div>
+                </div>
+                <div class="char-count">
+                    <span id="output-count">0</span> characters
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="copy-btn" class="btn btn-primary" disabled>Copy Output</button>
+            <button id="swap-btn" class="btn btn-secondary" disabled title="Swap input and output">
+                <svg class="swap-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <polyline points="19 12 12 19 5 12"></polyline>
+                </svg>
+                Swap Fields
+            </button>
+            <button id="clear-btn" class="btn btn-secondary">Clear All</button>
+        </div>
+
+        <div class="info">
+            <p id="mode-indicator"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
